@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/activity_main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"
+    android:divider="@drawable/shape_divider"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:showDividers="middle"
+    tools:context="cn.byk.pandora.avatarview.sample.MainActivity">
+
+    <cn.byk.pandora.avatarview.AvatarView
+        android:id="@+id/view_avatar_single"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:border_color="@android:color/white"
+        app:border_width="1dp"/>
+
+    <cn.byk.pandora.avatarview.AvatarView
+        android:id="@+id/view_avatar_mix"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:border_color="@android:color/white"
+        app:border_width="1dp"/>
+
+    <cn.byk.pandora.avatarview.AvatarView
+        android:id="@+id/view_avatar_origin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:border_color="@android:color/white"
+        app:border_width="1dp"/>
+
+</LinearLayout>

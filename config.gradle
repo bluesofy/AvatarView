@@ -1,0 +1,36 @@
+ext {
+    // Sdk and tools
+    compileSdkVersion = 25
+    buildToolsVersion = '25.0.2'
+    minSdkVersion = 15
+    targetSdkVersion = 25
+
+    // Libs dependencies
+    supportLibraryVersion = '25.1.0'
+    junitVersion = '4.12'
+    runnerVersion = '0.5'
+    espressoVersion = '2.2.2'
+
+    // Bin-tray
+    bintrayRepo = 'maven'
+    bintrayName = 'AvatarView'
+
+    publishedGroupId = 'cn.byk.pandora'
+    artifact = 'avatarview'
+    libraryName = 'AvatarView'
+    libraryVersion = '1.0'
+
+    libraryDescription = 'Multiple Avatar Shown View'
+
+    siteUrl = 'https://github.com/bluesofy/AvatarView'
+    gitUrl = 'https://github.com/bluesofy/AvatarView.git'
+    javaDocUrl = 'https://github.com/bluesofy/AvatarView/tree/master/lib/docs/javadoc'
+
+    developerId = 'bluesofy'
+    developerName = 'Byk'
+    developerEmail = 'bluesofy@live.cn'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
