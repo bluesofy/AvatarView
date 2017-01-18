@@ -50,7 +50,7 @@ mMixAvatarView.setMixRes(infos);
 
 ```
 
-- 更多请查看 [Demo](https://github.com/bluesofy/AvatarView/blob/master/app/src/main/java/cn/byk/pandora/avatarview/MainActivity.java)
+- 更多请查看 [Demo](https://github.com/bluesofy/AvatarView/blob/master/app/src/main/java/cn/byk/pandora/avatarview/sample/MainActivity.java)
 
 
 ### 特别鸣谢  Tks to
