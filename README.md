@@ -1,5 +1,7 @@
 ## AvatarView
 
+[ ![Download](https://api.bintray.com/packages/pandora/maven/AvatarView/images/download.svg) ](https://bintray.com/pandora/maven/AvatarView/_latestVersion)
+
 多头像显示视图，适用于普通用户头像以及群组多头像显示
 [README on GitHub](https://github.com/bluesofy/AvatarView/blob/master/README.md)
   
