@@ -62,9 +62,6 @@ bintray {
         publicDownloadNumbers = true
         version {
             desc = libraryDescription
-            gpg {
-                sign = false
-            }
         }
     }
 }

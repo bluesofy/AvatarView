@@ -33,5 +33,4 @@ dependencies {
     compile project(':avatarview')
 
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
 }
