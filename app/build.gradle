@@ -30,7 +30,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile project(':avatarview')
+//    compile project(':avatarview')
+    compile 'com.github.bluesofy:AvatarView:1.01'
 
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
 }

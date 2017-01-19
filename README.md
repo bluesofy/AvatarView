@@ -11,8 +11,21 @@
 
 
 ### 使用说明  Usage
+- 在Gradle中添加JitPack声明
+```gradle
+allprojects {
+    repositories {
+        …
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+- 添加引用
+```gradle
+compile 'com.github.bluesofy:AvatarView:1.01'
+```
 
-- 非原创，在项目 [SImageView](https://github.com/suzeyu1992/SImageView) 的基础上修改，原有的使用方法请通过传送门查看
+- 代码非原创，在项目 [SImageView](https://github.com/suzeyu1992/SImageView) 的基础上修改，原有的使用方法请通过传送门查看
 - 修改了资源实体，配置灵活，删除了原有的缓存策略，采用 [Glide](https://github.com/bumptech/glide) 加载，新增了显示文字头像，文字和图片混合显示等方法，类似于钉钉的群组头像显示
 
 ```java
@@ -62,3 +75,4 @@ mMixAvatarView.setMixRes(infos);
 
 ### 联系方式  Support or Contact
 - E-Mail: bluesofy@qq.com
+- E-Mail: bluesofy@live.cn
