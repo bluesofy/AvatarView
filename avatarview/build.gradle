@@ -9,7 +9,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
 
         versionCode Integer.parseInt(rootProject.ext.versionCode)
-        versionName rootProject.ext.versionName
+        versionName rootProject.ext.libraryVersion
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 

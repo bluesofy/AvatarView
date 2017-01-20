@@ -13,7 +13,6 @@ ext {
 
     // version
     versionCode = '11'
-    versionName = '1.1'
 
     // Bin-tray
     bintrayRepo = 'maven'
@@ -22,7 +21,7 @@ ext {
     publishedGroupId = 'cn.byk.pandora'
     artifact = 'avatarview'
     libraryName = 'AvatarView'
-    libraryVersion = '1.0'
+    libraryVersion = '1.1'
 
     libraryDescription = 'Multiple Avatar Shown View'
 
