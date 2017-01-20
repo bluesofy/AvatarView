@@ -11,6 +11,10 @@ ext {
     runnerVersion = '0.5'
     espressoVersion = '2.2.2'
 
+    // version
+    versionCode = '11'
+    versionName = '1.1'
+
     // Bin-tray
     bintrayRepo = 'maven'
     bintrayName = 'AvatarView'

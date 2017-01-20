@@ -203,7 +203,7 @@ public class AvatarView extends View {
             } else if (heightSize > 0) {
                 w = heightSize;
             } else {
-                w = (int) ScreenMan.dip2px(mContext, 48f);
+                w = (int) ScreenMan.dip2px(mContext, 24f);
             }
 
             w += pLeft + pRight;    // 加上padding
@@ -225,7 +225,7 @@ public class AvatarView extends View {
 
             // 如果既没有设置前景, 也没有背景, 设置46dp占位
             if ((mDrawableWidth <= 0) && (getSuggestedMinimumWidth() <= 0)) {
-                w = (int) ScreenMan.dip2px(mContext, 46f) + pLeft + pRight;
+                w = (int) ScreenMan.dip2px(mContext, 24f) + pLeft + pRight;
             }
         } else if (widthSpecMode == MeasureSpec.EXACTLY) {
             w = widthSize;
@@ -239,7 +239,7 @@ public class AvatarView extends View {
             } else if (widthSize > 0) {
                 h = widthSize;
             } else {
-                h = (int) ScreenMan.dip2px(mContext, 48f);
+                h = (int) ScreenMan.dip2px(mContext, 24f);
             }
 
             h += pTop + pBottom; // 加上padding
@@ -262,7 +262,7 @@ public class AvatarView extends View {
 
             // 如果既没有设置前景, 也没有背景, 设置46dp占位
             if ((mDrawableHeight <= 0) && (getSuggestedMinimumHeight() <= 0)) {
-                h = (int) ScreenMan.dip2px(mContext, 46) + pTop + pBottom;
+                h = (int) ScreenMan.dip2px(mContext, 24f) + pTop + pBottom;
             }
         } else if (heightSpecMode == MeasureSpec.EXACTLY) {
             h = heightSize;
@@ -386,12 +386,7 @@ public class AvatarView extends View {
      */
     public AvatarView setDrawStrategy(IDrawingStrategy mDrawStrategy) {
         this.mDrawStrategy = mDrawStrategy;
-        if (mDrawStrategy instanceof ConcreteDrawingStrategy) {
-            mCloseNormalOnePicLoad = false;
-        } else {
-            mCloseNormalOnePicLoad = true;
-        }
-
+        mCloseNormalOnePicLoad = !(mDrawStrategy instanceof ConcreteDrawingStrategy);
         return this;
     }
 

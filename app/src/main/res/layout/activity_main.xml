@@ -22,15 +22,15 @@
 
     <cn.byk.pandora.avatarview.AvatarView
         android:id="@+id/view_avatar_mix"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         app:border_color="@android:color/white"
         app:border_width="1dp"/>
 
     <cn.byk.pandora.avatarview.AvatarView
         android:id="@+id/view_avatar_origin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         app:border_color="@android:color/white"
         app:border_width="1dp"/>
 
