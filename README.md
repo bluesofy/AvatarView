@@ -25,7 +25,7 @@ allprojects {
 compile 'com.github.bluesofy:AvatarView:1.1'
 
 compile 'com.github.bumptech.glide:glide:3.7.0'  // Glide库
-compile "com.android.support:support-v4:25.1.0"  // v4库
+compile 'com.android.support:support-v4:25.1.0'  // v4库
 ```
 
 - 代码非原创，在项目 [SImageView](https://github.com/suzeyu1992/SImageView) 的基础上修改，原有的使用方法请通过传送门查看
