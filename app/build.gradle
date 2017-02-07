@@ -32,7 +32,7 @@ dependencies {
     })
 
 //    compile project(':avatarview')
-    compile 'com.github.bluesofy:AvatarView:1.1'
+    compile 'cn.byk.pandora:avatarview:1.2'
 
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
 }

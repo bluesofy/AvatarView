@@ -6,13 +6,13 @@ ext {
     targetSdkVersion = 25
 
     // Libs dependencies
-    supportLibraryVersion = '25.1.0'
+    supportLibraryVersion = '25.1.1'
     junitVersion = '4.12'
     runnerVersion = '0.5'
     espressoVersion = '2.2.2'
 
     // version
-    versionCode = '11'
+    versionCode = '12'
 
     // Bin-tray
     bintrayRepo = 'maven'
@@ -21,7 +21,7 @@ ext {
     publishedGroupId = 'cn.byk.pandora'
     artifact = 'avatarview'
     libraryName = 'AvatarView'
-    libraryVersion = '1.1'
+    libraryVersion = '1.2'
 
     libraryDescription = 'Multiple Avatar Shown View'
 
@@ -29,9 +29,9 @@ ext {
     gitUrl = 'https://github.com/bluesofy/AvatarView.git'
     javaDocUrl = 'https://github.com/bluesofy/AvatarView/tree/master/lib/docs/javadoc'
 
-    developerId = 'bluesofy'
+    developerId = 'blueyuki'
     developerName = 'Byk'
-    developerEmail = 'bluesofy@live.cn'
+    developerEmail = 'blueyuki@yeah.net'
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
