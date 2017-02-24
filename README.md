@@ -1,6 +1,6 @@
 ## AvatarView
 
-[ ![Download](https://api.bintray.com/packages/blueyuki/maven/AvatarView/images/download.svg) ](https://bintray.com/blueyuki/maven/AvatarView/_latestVersion)
+[ ![Maven](https://api.bintray.com/packages/blueyuki/maven/AvatarView/images/download.svg) ](https://bintray.com/blueyuki/maven/AvatarView/_latestVersion)
 
 多头像显示视图，适用于普通用户头像以及群组多头像显示
 [README on GitHub](https://github.com/bluesofy/AvatarView/blob/master/README.md)
@@ -13,8 +13,9 @@
 ### 使用说明  Usage
 - 添加依赖
 ```gradle
-compile 'cn.byk.pandora:avatarview:1.2'
+compile 'cn.byk.pandora:avatarview:1.4'
 
+// 第三方依赖库外部添加，版本号自由
 compile 'com.github.bumptech.glide:glide:3.7.0'    // Glide库
 compile 'com.android.support:support-v4:25.1.1'    // v4库
 ```

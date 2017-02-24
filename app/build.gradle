@@ -10,7 +10,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
 
-        versionCode Integer.parseInt(rootProject.ext.versionCode)
+        versionCode rootProject.ext.versionCode as int
         versionName rootProject.ext.libraryVersion
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -32,7 +32,10 @@ dependencies {
     })
 
 //    compile project(':avatarview')
-    compile 'cn.byk.pandora:avatarview:1.2'
+    compile 'cn.byk.pandora:avatarview:1.4'
 
+    compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }

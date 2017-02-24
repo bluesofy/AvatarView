@@ -8,17 +8,23 @@ task sourcesJar(type: Jar) {
 }
 
 task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
     failOnError false
-
-    options.encoding "UTF-8"
-    options.charSet 'UTF-8'
-    options.author true
-    options.version true
-    options.links javaDocUrl
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
 }
 
+javadoc {
+    options {
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        links javaDocUrl
+    }
+}
+
+// build a jar with javadoc
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
@@ -50,6 +56,7 @@ bintray {
     key = properties.getProperty("bintray.apikey")
 
     configurations = ['archives']
+
     pkg {
         repo = bintrayRepo
         name = bintrayName
@@ -60,7 +67,9 @@ bintray {
         publish = true
         publicDownloadNumbers = true
         version {
+            name = libraryVersion
             desc = libraryDescription
+            vcsTag = libraryVersion
         }
     }
 }

@@ -8,7 +8,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
 
-        versionCode Integer.parseInt(rootProject.ext.versionCode)
+        versionCode rootProject.ext.versionCode as int
         versionName rootProject.ext.libraryVersion
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -23,14 +23,13 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile "junit:junit:$rootProject.ext.junitVersion"
     androidTestCompile("com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    provided 'com.github.bumptech.glide:glide:3.7.0'
+    provided "com.android.support:support-v4:$rootProject.supportLibraryVersion"
 }
 
 apply from: 'install.gradle'
