@@ -1,13 +1,9 @@
 package cn.byk.pandora.avatarview.layout;
 
-
 import java.util.ArrayList;
 
 /**
- * Author :  suzeyu
- * Time   :  2016-11-29  下午9:11
- * Blog   :  http://szysky.com
- * GitHub :  https://github.com/suzeyu1992
+ * Author :  suzeyu Time   :  2016-11-29  下午9:11 Blog   :  http://szysky.com GitHub :  https://github.com/suzeyu1992
  * ClassDescription : QQ 群组布局排列的具体实现
  */
 
@@ -16,8 +12,9 @@ public class QQLayoutManager implements ILayoutManager {
     /**
      * 针对图片的数量, 对应的图片处理的配置系数
      */
-    public static final float[][] sizes = {new float[]{0.9f, 0.9f}, new float[]{0.5f, 0.65f}, new float[]{0.45f, 0.8f},
-                                           new float[]{0.45f, 0.91f}, new float[]{0.38f, 0.80f}};
+    public static final float[][] sizes =
+            {new float[]{0.9f, 0.9f}, new float[]{0.5f, 0.65f}, new float[]{0.45f, 0.8f}, new float[]{0.45f, 0.91f},
+                    new float[]{0.38f, 0.80f}};
 
     private static final int MAX_NUM = 5;
 
@@ -48,7 +45,6 @@ public class QQLayoutManager implements ILayoutManager {
             layoutSquareSide = viewWidth;
         }
 
-
         // 获得对应缩放系数集合
         float[] size = sizes[viewNum - 1];
 
@@ -68,7 +64,6 @@ public class QQLayoutManager implements ILayoutManager {
         }
         return infos;
     }
-
 
     /**
      * 根据个数选择具体实现的布局排放
@@ -133,7 +128,6 @@ public class QQLayoutManager implements ILayoutManager {
         float x5 = (float) (-s1 * Math.cos(19 * Math.PI / 180));
         float y5 = (float) (s1 * Math.sin(18 * Math.PI / 180));
 
-
         // 居中 Y轴偏移量
         float xx1 = (dimension - cd - y3 - s1) / 2;
         // 居中 X轴偏移量
@@ -181,7 +175,6 @@ public class QQLayoutManager implements ILayoutManager {
 
         float x4 = x1;
         float y4 = y3;
-
 
         // 居中 X轴偏移量
         float xx1 = (dimension - cd - s1) / 2;
@@ -233,7 +226,6 @@ public class QQLayoutManager implements ILayoutManager {
             default:
                 return new float[]{0f, 0f};
         }
-
     }
 
     /**
@@ -250,7 +242,6 @@ public class QQLayoutManager implements ILayoutManager {
 
         float x2 = s1;
         float y2 = s1;
-
 
         // 从控件左边开始计算 X轴偏移量
         float xx1 = (dimension - cd - s1) / 2;

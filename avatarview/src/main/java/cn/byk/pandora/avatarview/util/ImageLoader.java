@@ -4,14 +4,16 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 
-import com.bumptech.glide.BitmapTypeRequest;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import cn.byk.pandora.avatarview.AvatarView;
 import cn.byk.pandora.avatarview.bean.ResInfo;
 
@@ -37,49 +39,51 @@ public class ImageLoader {
         return sInstance;
     }
 
-    public void load(Context context, String url, SimpleTarget target) {
+    public void load(Context context, String url, CustomTarget<Bitmap> target) {
         load(context, url, target, null, null);
     }
 
-    public void load(Context context, String url, SimpleTarget target, Drawable placeholder, Drawable errorDrawable) {
-        BitmapTypeRequest request = Glide.with(context)
-                                         .load(url)
-                                         .asBitmap();
+    public void load(Context context, String url, CustomTarget<Bitmap> target, Drawable placeholder,
+            Drawable errorDrawable) {
+        RequestBuilder<Bitmap> request = Glide.with(context)
+                                              .asBitmap()
+                                              .load(url);
 
         if (placeholder != null) {
-            request.placeholder(placeholder);
+            request = request.placeholder(placeholder);
         }
 
         if (errorDrawable != null) {
-            request.error(errorDrawable);
+            request = request.error(errorDrawable);
         }
 
         request.into(target);
     }
 
     public void load(Context context, List<String> urls, MultiLoadTarget target) {
-        load(context, urls, target, null);
+        load(context, urls, target, null, null);
     }
 
-    public void load(Context context, List<String> urls, MultiLoadTarget target, Drawable errorDrawable) {
+    public void load(Context context, List<String> urls, MultiLoadTarget target, Drawable placeholder,
+            Drawable errorDrawable) {
         target.max(urls.size());
         for (String url : urls) {
-            SimpleTarget simpleTarget = createGlideTarget(null, url, target.getWidth(), target.getHeight(), false,
-                                                          target);
-            load(context, url, simpleTarget, null, errorDrawable);
+            CustomTarget<Bitmap> customTarget =
+                    createTarget(null, url, target.getWidth(), target.getHeight(), false, target);
+            load(context, url, customTarget, placeholder, errorDrawable);
         }
     }
 
-    public SimpleTarget createGlideTarget(final AvatarView view, String url, int width, int height,
-                                          boolean fromNormal) {
-        return createGlideTarget(view, url, width, height, fromNormal, null);
+    public CustomTarget<Bitmap> createTarget(final AvatarView view, String url, int width, int height,
+            boolean fromNormal) {
+        return createTarget(view, url, width, height, fromNormal, null);
     }
 
-    public SimpleTarget createGlideTarget(final AvatarView view, final String url, int width, int height,
-                                          final boolean fromNormal, final MultiLoadTarget multiLoadTarget) {
-        return new SimpleTarget<Bitmap>(width, height) {
+    public CustomTarget<Bitmap> createTarget(final AvatarView view, final String url, int width, int height,
+            final boolean fromNormal, final MultiLoadTarget multiLoadTarget) {
+        return new CustomTarget<Bitmap>(width, height) {
             @Override
-            public void onResourceReady(Bitmap resource, GlideAnimation glideAnimation) {
+            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                 if (view != null) {
                     view.setBitmap(resource, fromNormal);
                 }
@@ -90,23 +94,25 @@ public class ImageLoader {
             }
 
             @Override
-            public void onLoadStarted(Drawable placeholder) {
-                super.onLoadStarted(placeholder);
-                if (view != null) {
-                    view.setDrawable(placeholder, fromNormal);
-                }
-            }
+            public void onLoadCleared(@Nullable Drawable placeholder) {}
 
             @Override
-            public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                super.onLoadFailed(e, errorDrawable);
-
+            public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                super.onLoadFailed(errorDrawable);
                 if (view != null) {
                     view.setDrawable(errorDrawable, fromNormal);
                 }
 
                 if (multiLoadTarget != null) {
                     multiLoadTarget.add(url, BitmapMan.toBitmap(errorDrawable));
+                }
+            }
+
+            @Override
+            public void onLoadStarted(@Nullable Drawable placeholder) {
+                super.onLoadStarted(placeholder);
+                if (view != null) {
+                    view.setDrawable(placeholder, fromNormal);
                 }
             }
         };
@@ -172,5 +178,4 @@ public class ImageLoader {
             }
         }
     }
-
 }

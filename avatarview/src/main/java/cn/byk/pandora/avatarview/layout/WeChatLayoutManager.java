@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import cn.byk.pandora.avatarview.util.ScreenMan;
 
 /**
- * Author :  suzeyu
- * Time   :  2016-12-01  下午11:14
- * Blog   :  http://szysky.com
- * GitHub :  https://github.com/suzeyu1992
+ * Author :  suzeyu Time   :  2016-12-01  下午11:14 Blog   :  http://szysky.com GitHub :  https://github.com/suzeyu1992
  * ClassDescription :  微信 measure测量布局实现
  */
 
@@ -19,7 +16,7 @@ public class WeChatLayoutManager implements ILayoutManager {
 
     private static final int MAX_NUM = 9;
 
-    private Context mContext;
+    private final Context mContext;
 
     /**
      * 缓存返回子元素布局对象
@@ -141,7 +138,7 @@ public class WeChatLayoutManager implements ILayoutManager {
         int addPixel = (int) ScreenMan.dip2px(mContext, dp);
 
         // 每个子元素的空隙不得超出子元素边长的三分之一
-        addPixel = addPixel > side / 3 ? side / 3 : addPixel;
+        addPixel = Math.min(addPixel, side / 3);
 
         // 开始添加空隙
         for (LayoutInfoGroup data : datas) {

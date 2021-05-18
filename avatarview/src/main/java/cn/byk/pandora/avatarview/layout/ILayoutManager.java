@@ -5,10 +5,7 @@ import android.graphics.Point;
 import java.util.ArrayList;
 
 /**
- * Author :  suzeyu
- * Time   :  2016-11-29  下午9:03
- * Blog   :  http://szysky.com
- * GitHub :  https://github.com/suzeyu1992
+ * Author :  suzeyu Time   :  2016-11-29  下午9:03 Blog   :  http://szysky.com GitHub :  https://github.com/suzeyu1992
  * ClassDescription : 控件多个图片时 布局排列的位置计算接口
  */
 
@@ -23,7 +20,6 @@ public interface ILayoutManager {
      * @return 返回一个信息集合
      */
     ArrayList<LayoutInfoGroup> calculate(int viewWidth, int viewHeight, int viewNum);
-
 
     /**
      * 封装控件内部单个元素显示的布局信息
@@ -41,7 +37,7 @@ public interface ILayoutManager {
          */
         public Point leftTopPoint = new Point();
         public Point rightBottomPoint = new Point();
-
+        
         @Override
         protected Object clone() throws CloneNotSupportedException {
             LayoutInfoGroup clone = (LayoutInfoGroup) super.clone();

@@ -7,16 +7,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.IntDef;
-import android.support.v4.content.res.ResourcesCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.CustomTarget;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -25,6 +21,10 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IntDef;
+import androidx.core.content.res.ResourcesCompat;
 import cn.byk.pandora.avatarview.bean.DisplayInfo;
 import cn.byk.pandora.avatarview.bean.ResInfo;
 import cn.byk.pandora.avatarview.layout.ILayoutManager;
@@ -67,15 +67,12 @@ public class AvatarView extends View {
     private boolean mCloseNormalOnePicLoad = false;
 
     /**
-     * 具体子元素的 measure布局 策略,
-     * 默认下,对于一张图片会使用 mNormalOnePicStrategy 变量, 如果实现了自定义策略,
-     * 并且策略内部包含了一张图片的布局逻辑, 可以通过变量强制关闭单图片的默认处理.
+     * 具体子元素的 measure布局 策略, 默认下,对于一张图片会使用 mNormalOnePicStrategy 变量, 如果实现了自定义策略, 并且策略内部包含了一张图片的布局逻辑, 可以通过变量强制关闭单图片的默认处理.
      */
     private ILayoutManager mLayoutManager = new QQLayoutManager();
 
     /**
-     * 单个图片默认加载策略, 优先级高于多张图,
-     * 可以通过{@link #setCloseNormalOnePicLoad(boolean)}设置为true强制关闭此策略
+     * 单个图片默认加载策略, 优先级高于多张图, 可以通过{@link #setCloseNormalOnePicLoad(boolean)}设置为true强制关闭此策略
      */
     private NormalOnePicStrategy mNormalOnePicStrategy = new NormalOnePicStrategy();
 
@@ -92,14 +89,12 @@ public class AvatarView extends View {
     /**
      * 控件加载图片错误的资源id
      */
-    @DrawableRes
-    private int mErrPicResID = 0;
+    @DrawableRes private int mErrPicResID = 0;
 
     /**
      * 控件加载中的图片资源id
      */
-    @DrawableRes
-    private int mLoadingResID = 0;
+    @DrawableRes private int mLoadingResID = 0;
 
     public static final int TYPE_CIRCLE = 0;
     public static final int TYPE_RECT = 1;
@@ -114,7 +109,6 @@ public class AvatarView extends View {
     /** 显示类型,默认为上面五种定义类型 **/
     private int mCurrentDisplayShape = TYPE_CIRCLE;
 
-
     public static final int SCALE_TYPE_CENTER_INSIDE = 0;  // 图片比例不变, 以最大边的为标准缩放, 可能会有留白,显示全部图片
     public static final int SCALE_TYPE_FIX_XY = 1;         // 图片比例改变, 已填充控件为主, 显示全部图片
     public static final int SCALE_TYPE_CENTER_CROP = 2;    // 图片比例不变, 已填充控件为主, 图片可能显示不全
@@ -124,9 +118,8 @@ public class AvatarView extends View {
     public @interface ScaleType {}
 
     /**
-     * 当显示类型为矩形的时候, 缩放类型才会生效. 并且当有描边时, 缩放类型失效,
-     * 并且使用{@link #mCloseNormalOnePicLoad}的初始值通过使用单张图片的绘制逻辑才有处理效果
-     * 默认为{@link #SCALE_TYPE_CENTER_INSIDE}
+     * 当显示类型为矩形的时候, 缩放类型才会生效. 并且当有描边时, 缩放类型失效, 并且使用{@link #mCloseNormalOnePicLoad}的初始值通过使用单张图片的绘制逻辑才有处理效果 默认为{@link
+     * #SCALE_TYPE_CENTER_INSIDE}
      **/
     private int mScaleType = SCALE_TYPE_CENTER_INSIDE;
 
@@ -296,7 +289,7 @@ public class AvatarView extends View {
         if (mInfo.resInfos.size() == 1 && !mCloseNormalOnePicLoad) {
             mNormalOnePicStrategy.algorithm(canvas, 1, 1, mInfo.resInfos.get(0), (DisplayInfo) mInfo.clone());
             Log.i(TAG, "一张图片执行时间: " + (System.nanoTime() - startCur) / 1000000f + "毫秒");
-        } else if (mInfo.resInfos.size() > 0) {
+        } else if (!mInfo.resInfos.isEmpty()) {
             sizeMeasure();
             if (mInfo.coordinates == null) {
                 return;
@@ -312,8 +305,8 @@ public class AvatarView extends View {
                 int offsetX = childInfo.leftTopPoint.x;
                 int offsetY = childInfo.leftTopPoint.y;
 
-                Bitmap tempBmp = Bitmap.createBitmap(childInfo.innerWidth, childInfo.innerHeight,
-                                                     Bitmap.Config.ARGB_8888);
+                Bitmap tempBmp =
+                        Bitmap.createBitmap(childInfo.innerWidth, childInfo.innerHeight, Bitmap.Config.ARGB_8888);
 
                 // 首先关联一个bitmap, 并把关联的canvas对外提供出去
                 mExternalUseCanvas.setBitmap(tempBmp);
@@ -370,11 +363,9 @@ public class AvatarView extends View {
     }
 
     /**
-     * 设置 是否关闭单张图片时, 使用特定的单图绘制策略. true为关闭, false为开启, 默认为false
-     * 注明: 如果是默认值, 那么只有多个图片显示的时候才会使用{@link #mDrawStrategy}策略, 一张图片的时候会使用
-     * 内置的单张图片处理策略{@link #mNormalOnePicStrategy}.
-     * 如果通过{@link #setDrawStrategy(IDrawingStrategy)}实现了自定义策略, 那么单张图片开关标记将会
-     * 自动设置为关闭.
+     * 设置 是否关闭单张图片时, 使用特定的单图绘制策略. true为关闭, false为开启, 默认为false 注明: 如果是默认值, 那么只有多个图片显示的时候才会使用{@link #mDrawStrategy}策略,
+     * 一张图片的时候会使用 内置的单张图片处理策略{@link #mNormalOnePicStrategy}. 如果通过{@link #setDrawStrategy(IDrawingStrategy)}实现了自定义策略,
+     * 那么单张图片开关标记将会 自动设置为关闭.
      */
     public AvatarView setCloseNormalOnePicLoad(boolean isClose) {
         this.mCloseNormalOnePicLoad = isClose;
@@ -459,8 +450,7 @@ public class AvatarView extends View {
         return this;
     }
 
-    public
-    @ColorInt
+    public @ColorInt
     int getBorderColor() {
         return mInfo.borderColor;
     }
@@ -543,8 +533,7 @@ public class AvatarView extends View {
     }
 
     /**
-     * 针对某种情况下: 控件已经初始化还没有测量获得控件宽高时, 进行了url网址图片设置,
-     * 如果这个时候控件的宽高是0, 那么进行延迟发送的方式
+     * 针对某种情况下: 控件已经初始化还没有测量获得控件宽高时, 进行了url网址图片设置, 如果这个时候控件的宽高是0, 那么进行延迟发送的方式
      */
     private static final int MAX_SAFETY_NUM = 7;
     private volatile int mSafetyCurrent = 0;
@@ -614,7 +603,7 @@ public class AvatarView extends View {
             }
         }
 
-        if (urls.size() > 0) {
+        if (!urls.isEmpty()) {
             // Url集合放在最后异步加载
             setImageUrls(urls, false);
         } else {
@@ -631,18 +620,18 @@ public class AvatarView extends View {
         // 只有有一个url字符串和关闭了单张图片的开关才有计算的意义
         if (!TextUtils.isEmpty(url)) {
             ImageLoader loader = ImageLoader.getInstance();
-            SimpleTarget target;
+            CustomTarget<Bitmap> target;
 
             if (isCloseNormalOnePicLoad()) {
                 mInfo.addBitmap(null);
                 sizeMeasure();
-                target = loader.createGlideTarget(this, url, mInfo.coordinates.get(0).innerWidth,
-                                                  mInfo.coordinates.get(0).innerHeight, fromNormal);
+                target = loader.createTarget(this, url, mInfo.coordinates.get(0).innerWidth,
+                                             mInfo.coordinates.get(0).innerHeight, fromNormal);
             } else {
                 int reqWid = 0;
                 int reqHeight = 0;
 
-                int minSide = mInfo.height >= mInfo.width ? mInfo.width : mInfo.height;
+                int minSide = Math.min(mInfo.height, mInfo.width);
 
                 // 矩形比较特殊存在3种情况
                 if (mCurrentDisplayShape == TYPE_RECT) {
@@ -663,7 +652,7 @@ public class AvatarView extends View {
                     reqHeight = reqWid = minSide;
                 }
 
-                target = loader.createGlideTarget(this, url, reqWid, reqHeight, fromNormal);
+                target = loader.createTarget(this, url, reqWid, reqHeight, fromNormal);
             }
 
             loader.load(mContext, url, target, mInfo.placeholder, mInfo.errorDrawable);
@@ -681,7 +670,7 @@ public class AvatarView extends View {
         // 分开网络加载 和 bitmap处理
         if ((urls != null) && (urls.size() > 1)) {
             updateForListWithUrls(urls);
-        } else if ((bitmaps != null) && (bitmaps.size() > 0)) {
+        } else if (bitmaps != null && !bitmaps.isEmpty()) {
             for (Bitmap bitmap : bitmaps) {
                 mInfo.addBitmap(bitmap);
             }
@@ -709,9 +698,8 @@ public class AvatarView extends View {
     }
 
     /**
-     * 设置单张图片时, 图片的缩放类型, 只有在矩形图片和无描边的场景下有效,
-     * 并且使用{@link #mCloseNormalOnePicLoad}的初始值通过使用单张图片的绘制逻辑才有处理效果
-     * {@link #mScaleType}
+     * 设置单张图片时, 图片的缩放类型, 只有在矩形图片和无描边的场景下有效, 并且使用{@link #mCloseNormalOnePicLoad}的初始值通过使用单张图片的绘制逻辑才有处理效果 {@link
+     * #mScaleType}
      */
     public AvatarView setScaleType(@ScaleType int mScaleType) {
         this.mScaleType = mScaleType;
@@ -727,8 +715,7 @@ public class AvatarView extends View {
     }
 
     /**
-     * 设置单张图片时 圆角矩形 的圆角弧度系数, 取值为0~2, 默认为1
-     * 此设置属性不会立即生效, 需下次圆角矩形加载时才会有效.可手动invalidate刷新
+     * 设置单张图片时 圆角矩形 的圆角弧度系数, 取值为0~2, 默认为1 此设置属性不会立即生效, 需下次圆角矩形加载时才会有效.可手动invalidate刷新
      */
     public AvatarView setRectRoundRadius(float mRectRoundRadius) {
         mNormalOnePicStrategy.setRectRoundRadius(mRectRoundRadius);
@@ -736,8 +723,7 @@ public class AvatarView extends View {
     }
 
     /**
-     * 设置单张图片 oval椭圆的宽高比.
-     * 此设置属性同样不会立即生效, 需下次椭圆显示加载时才会生效, 可手动invalidate刷新
+     * 设置单张图片 oval椭圆的宽高比. 此设置属性同样不会立即生效, 需下次椭圆显示加载时才会生效, 可手动invalidate刷新
      *
      * @param widthHeightRadio 宽高比. 只能传入大于0, 默认值为宽高比为2/1  也就是2f
      */
@@ -780,7 +766,7 @@ public class AvatarView extends View {
     }
 
     private void updateForListWithUrls(List<String> urls) {
-        int temp = mInfo.height > mInfo.width ? mInfo.width : mInfo.height;
+        int temp = Math.min(mInfo.height, mInfo.width);
 
         // 这里进行简单的处理判断,  不做细分, 过多的不同分辨率进行缓存的key不一定很适用, 因为图片从磁盘或者网络获取的时候,
         // 是通过inJustDecodeBounds, 做一个笼统的2的次幂缩放. 适当的取一定情况下即可.
@@ -792,7 +778,7 @@ public class AvatarView extends View {
 
         ImageLoader loader = ImageLoader.getInstance();
         ImageLoader.MultiLoadTarget target = loader.createMultiTarget(this, temp, temp);
-        loader.load(mContext, urls, target, mInfo.errorDrawable);
+        loader.load(mContext, urls, target, mInfo.placeholder, mInfo.errorDrawable);
     }
 
     private void addBitmaps(ArrayList<ResInfo> resInfos) {
@@ -800,5 +786,4 @@ public class AvatarView extends View {
             mInfo.addBitmapByKey(res.getUrl(), res.getBitmap());
         }
     }
-
 }

@@ -1,6 +1,5 @@
 ## AvatarView
 
-[ ![Maven](https://api.bintray.com/packages/blueyuki/maven/AvatarView/images/download.svg) ](https://bintray.com/blueyuki/maven/AvatarView/_latestVersion)
 
 多头像显示视图，适用于普通用户头像以及群组多头像显示
 [README on GitHub](https://github.com/bluesofy/AvatarView/blob/master/README.md)
@@ -12,12 +11,12 @@
 
 ### 使用说明  Usage
 - 添加依赖
+- 从JCenter转移到mavenCentral，记得在主工程里添加mavenCentral()
 ```gradle
-compile 'cn.byk.pandora:avatarview:1.4'
+implementation 'io.github.bluesofy:avatarview:2.0'
 
 // 第三方依赖库外部添加，版本号自由
-compile 'com.github.bumptech.glide:glide:3.7.0'    // Glide库
-compile 'com.android.support:support-v4:25.1.1'    // v4库
+compile 'com.github.bumptech.glide:glide:4.12.0'    // Glide库
 ```
 - 代码非原创，在项目 [SImageView](https://github.com/suzeyu1992/SImageView) 的基础上修改，原有的使用方法请通过传送门查看
 - 修改了资源实体，配置灵活，删除了原有的缓存策略，采用 [Glide](https://github.com/bumptech/glide) 加载，新增了显示文字头像，文字和图片混合显示等方法，类似于钉钉的群组头像显示
@@ -66,5 +65,4 @@ mMixAvatarView.setMixRes(infos);
 <br>
 
 ### 联系方式  Support or Contact
-- E-Mail: bluesofy@qq.com
-- E-Mail: bluesofy@live.cn
+- E-Mail: <bluesofy@qq.com> or <bluesofy@live.cn>

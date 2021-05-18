@@ -69,7 +69,6 @@ public class DisplayInfo implements Cloneable {
         resInfos.clear();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public Object clone() {
         DisplayInfo clone;
@@ -85,5 +84,4 @@ public class DisplayInfo implements Cloneable {
         }
         return clone;
     }
-
 }

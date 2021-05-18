@@ -2,17 +2,17 @@ package cn.byk.pandora.avatarview.sample;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.fragment.app.FragmentActivity;
 import cn.byk.pandora.avatarview.AvatarView;
 import cn.byk.pandora.avatarview.bean.ResInfo;
 import cn.byk.pandora.avatarview.layout.QQLayoutManager;
 import cn.byk.pandora.avatarview.layout.WeChatLayoutManager;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
 
     private AvatarView mSingleAvatarView;
     private AvatarView mMixAvatarView;
@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         // 混合头像
         mMixAvatarView = (AvatarView) findViewById(R.id.view_avatar_mix);
-        mMixAvatarView.setLayoutManager(new WeChatLayoutManager(this));
-        mMixAvatarView.setDisplayShape(AvatarView.TYPE_RECT);
-        mMixAvatarView.setErrPicResID(R.mipmap.ic_launcher);
+        mMixAvatarView.setLayoutManager(new WeChatLayoutManager(this))
+                      .setDisplayShape(AvatarView.TYPE_RECT)
+                      .setErrPicResID(R.mipmap.ic_launcher);
         List<ResInfo> infos = new ArrayList<>();
         // 文字头像
         infos.add(ResInfo.build()
@@ -63,11 +63,11 @@ public class MainActivity extends AppCompatActivity {
 
         // 原作者的调用方法
         mOriginAvatarView = (AvatarView) findViewById(R.id.view_avatar_origin);
-        mOriginAvatarView.setLayoutManager(new QQLayoutManager());
-        mOriginAvatarView.setImageUrls("http://www.tshseo.com/uploads/allimg/141024/2234236415-0.jpg",
+        mOriginAvatarView.setLayoutManager(new QQLayoutManager())
+                         .setErrPicResID(R.mipmap.ic_launcher)
+                         .setImageUrls("http://www.tshseo.com/uploads/allimg/141024/2234236415-0.jpg",
                                        "http://www.3dmgame.com/uploads/allimg/141224/270_141224171322_1.jpg",
                                        "https://images.plurk.com/f76339fbc1eb3a1381b811b2879ac8e3.jpg",
                                        "http://www.3dmgame.com/uploads/allimg/141224/270_141224171322_1.jpg");
     }
-
 }
